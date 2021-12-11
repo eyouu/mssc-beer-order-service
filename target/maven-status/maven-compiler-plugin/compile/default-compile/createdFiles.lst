@@ -20,6 +20,7 @@ com\whosaidmeow\msscbeeroderservice\web\mappers\DateMapper.class
 com\whosaidmeow\msscbeeroderservice\web\model\BaseItem.class
 com\whosaidmeow\msscbeeroderservice\domain\OrderStatusEnum.class
 com\whosaidmeow\msscbeeroderservice\web\model\BeerOrderDto$BeerOrderDtoBuilder.class
+com\whosaidmeow\msscbeeroderservice\web\mappers\BeerOrderMapperImpl$1.class
 com\whosaidmeow\msscbeeroderservice\domain\BeerOrderLine$BeerOrderLineBuilder.class
 com\whosaidmeow\msscbeeroderservice\web\controllers\BeerOrderController.class
 com\whosaidmeow\msscbeeroderservice\repositories\CustomerRepository.class

@@ -1,7 +1,6 @@
 package com.whosaidmeow.msscbeeroderservice.sm.actions;
 
-import com.whosaidmeow.brewery.model.event.AllocateOrderEvent;
-import com.whosaidmeow.msscbeeroderservice.config.JmsConfig;
+import com.whosaidmeow.brewery.model.event.AllocateOrderRequestEvent;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrder;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrderEventEnum;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrderStatusEnum;
@@ -33,7 +32,7 @@ public class AllocateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
         String beerOrderId = (String) context.getMessage().getHeaders().get(BEER_ORDER_ID_HEADER);
         BeerOrder beerOrder = beerOrderRepository.getById(UUID.fromString(beerOrderId));
 
-        jmsTemplate.convertAndSend(ALLOCATE_ORDER_QUEUE, AllocateOrderEvent.builder()
+        jmsTemplate.convertAndSend(ALLOCATE_ORDER_QUEUE, AllocateOrderRequestEvent.builder()
                 .beerOrderDTO(beerOrderMapper.beerOrderToDto(beerOrder))
                 .build());
 

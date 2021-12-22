@@ -4,8 +4,8 @@ import com.whosaidmeow.msscbeeroderservice.bootstrap.BeerOrderBootStrap;
 import com.whosaidmeow.msscbeeroderservice.domain.Customer;
 import com.whosaidmeow.msscbeeroderservice.repositories.BeerOrderRepository;
 import com.whosaidmeow.msscbeeroderservice.repositories.CustomerRepository;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderDto;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderLineDto;
+import com.whosaidmeow.brewery.model.BeerOrderDTO;
+import com.whosaidmeow.brewery.model.BeerOrderLineDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -52,21 +52,21 @@ public class TastingRoomService {
     private void doPlaceOrder(Customer customer) {
         String beerToOrder = getRandomBeerUpc();
 
-        BeerOrderLineDto beerOrderLine = BeerOrderLineDto.builder()
+        BeerOrderLineDTO beerOrderLine = BeerOrderLineDTO.builder()
                 .upc(beerToOrder)
                 .orderQuantity(new Random().nextInt(6)) //todo externalize value to property
                 .build();
 
-        List<BeerOrderLineDto> beerOrderLineSet = new ArrayList<>();
+        List<BeerOrderLineDTO> beerOrderLineSet = new ArrayList<>();
         beerOrderLineSet.add(beerOrderLine);
 
-        BeerOrderDto beerOrder = BeerOrderDto.builder()
+        BeerOrderDTO beerOrder = BeerOrderDTO.builder()
                 .customerId(customer.getId())
                 .customerRef(UUID.randomUUID().toString())
                 .beerOrderLines(beerOrderLineSet)
                 .build();
 
-        BeerOrderDto savedOrder = beerOrderService.placeOrder(customer.getId(), beerOrder);
+        BeerOrderDTO savedOrder = beerOrderService.placeOrder(customer.getId(), beerOrder);
     }
 
     private String getRandomBeerUpc() {

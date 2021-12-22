@@ -3,7 +3,7 @@ package com.whosaidmeow.msscbeeroderservice.web.mappers;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrderLine;
 import com.whosaidmeow.msscbeeroderservice.services.beer.BeerService;
 import com.whosaidmeow.msscbeeroderservice.services.beer.model.BeerDTO;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderLineDto;
+import com.whosaidmeow.brewery.model.BeerOrderLineDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -26,8 +26,8 @@ public abstract class BeerOrderLineMapperDecorator implements BeerOrderLineMappe
     }
 
     @Override
-    public BeerOrderLineDto beerOrderLineToDto(BeerOrderLine line) {
-        BeerOrderLineDto beerOrderLineDto = beerOrderLineMapper.beerOrderLineToDto(line);
+    public BeerOrderLineDTO beerOrderLineToDto(BeerOrderLine line) {
+        BeerOrderLineDTO beerOrderLineDto = beerOrderLineMapper.beerOrderLineToDto(line);
         Optional<BeerDTO> beerByUpc = beerService.getBeerByUpc(line.getUpc());
 
         beerByUpc.ifPresent(beerDTO -> {

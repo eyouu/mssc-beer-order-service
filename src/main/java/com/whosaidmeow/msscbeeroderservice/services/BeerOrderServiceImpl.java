@@ -3,8 +3,8 @@ package com.whosaidmeow.msscbeeroderservice.services;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrderStatusEnum;
 import com.whosaidmeow.msscbeeroderservice.repositories.BeerOrderRepository;
 import com.whosaidmeow.msscbeeroderservice.repositories.CustomerRepository;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderDto;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderPagedList;
+import com.whosaidmeow.brewery.model.BeerOrderDTO;
+import com.whosaidmeow.brewery.model.BeerOrderPagedList;
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrder;
 import com.whosaidmeow.msscbeeroderservice.domain.Customer;
 import com.whosaidmeow.msscbeeroderservice.web.mappers.BeerOrderMapper;
@@ -60,7 +60,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
 
     @Transactional
     @Override
-    public BeerOrderDto placeOrder(UUID customerId, BeerOrderDto beerOrderDto) {
+    public BeerOrderDTO placeOrder(UUID customerId, BeerOrderDTO beerOrderDto) {
         Optional<Customer> customerOptional = customerRepository.findById(customerId);
 
         if (customerOptional.isPresent()) {
@@ -85,7 +85,7 @@ public class BeerOrderServiceImpl implements BeerOrderService {
     }
 
     @Override
-    public BeerOrderDto getOrderById(UUID customerId, UUID orderId) {
+    public BeerOrderDTO getOrderById(UUID customerId, UUID orderId) {
         return beerOrderMapper.beerOrderToDto(getOrder(customerId, orderId));
     }
 

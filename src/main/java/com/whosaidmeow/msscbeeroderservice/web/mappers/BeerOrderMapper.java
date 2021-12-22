@@ -1,7 +1,7 @@
 package com.whosaidmeow.msscbeeroderservice.web.mappers;
 
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrder;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderDto;
+import com.whosaidmeow.brewery.model.BeerOrderDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 public interface BeerOrderMapper {
 
     @Mapping(target = "customerId", source = "customer.id")
-    BeerOrderDto beerOrderToDto(BeerOrder beerOrder);
+    BeerOrderDTO beerOrderToDto(BeerOrder beerOrder);
 
-    BeerOrder dtoToBeerOrder(BeerOrderDto dto);
+    BeerOrder dtoToBeerOrder(BeerOrderDTO dto);
 }

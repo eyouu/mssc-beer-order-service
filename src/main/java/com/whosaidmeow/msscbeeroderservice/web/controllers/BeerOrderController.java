@@ -1,8 +1,8 @@
 package com.whosaidmeow.msscbeeroderservice.web.controllers;
 
 import com.whosaidmeow.msscbeeroderservice.services.BeerOrderService;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderDto;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderPagedList;
+import com.whosaidmeow.brewery.model.BeerOrderDTO;
+import com.whosaidmeow.brewery.model.BeerOrderPagedList;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -40,12 +40,12 @@ public class BeerOrderController {
 
     @PostMapping("orders")
     @ResponseStatus(HttpStatus.CREATED)
-    public BeerOrderDto placeOrder(@PathVariable("customerId") UUID customerId, @RequestBody BeerOrderDto beerOrderDto){
+    public BeerOrderDTO placeOrder(@PathVariable("customerId") UUID customerId, @RequestBody BeerOrderDTO beerOrderDto){
         return beerOrderService.placeOrder(customerId, beerOrderDto);
     }
 
     @GetMapping("orders/{orderId}")
-    public BeerOrderDto getOrder(@PathVariable("customerId") UUID customerId, @PathVariable("orderId") UUID orderId){
+    public BeerOrderDTO getOrder(@PathVariable("customerId") UUID customerId, @PathVariable("orderId") UUID orderId){
         return beerOrderService.getOrderById(customerId, orderId);
     }
 

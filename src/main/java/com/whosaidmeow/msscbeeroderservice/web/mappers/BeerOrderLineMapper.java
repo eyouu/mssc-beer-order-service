@@ -1,7 +1,7 @@
 package com.whosaidmeow.msscbeeroderservice.web.mappers;
 
 import com.whosaidmeow.msscbeeroderservice.domain.BeerOrderLine;
-import com.whosaidmeow.msscbeeroderservice.web.model.BeerOrderLineDto;
+import com.whosaidmeow.brewery.model.BeerOrderLineDTO;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 @DecoratedWith(BeerOrderLineMapperDecorator.class)
 public interface BeerOrderLineMapper {
 
-    BeerOrderLineDto beerOrderLineToDto(BeerOrderLine line);
+    BeerOrderLineDTO beerOrderLineToDto(BeerOrderLine line);
 
-    BeerOrderLine dtoToBeerOrderLine(BeerOrderLineDto dto);
+    BeerOrderLine dtoToBeerOrderLine(BeerOrderLineDTO dto);
 }

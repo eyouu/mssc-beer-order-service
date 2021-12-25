@@ -57,14 +57,14 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
     public void beerOrderAllocationPassed(BeerOrderDTO beerOrderDTO) {
         BeerOrder beerOrder = beerOrderRepository.getById(beerOrderDTO.getId());
         sendBeerOrderEvent(beerOrder, BeerOrderEventEnum.ALLOCATION_SUCCESS);
-        updateAllocationQuantity(beerOrderDTO, beerOrder);
+        updateAllocationQuantity(beerOrderDTO);
     }
 
     @Override
     public void beerOrderAllocationPendingInventory(BeerOrderDTO beerOrderDTO) {
         BeerOrder beerOrder = beerOrderRepository.getById(beerOrderDTO.getId());
         sendBeerOrderEvent(beerOrder, BeerOrderEventEnum.ALLOCATION_NO_INVENTORY);
-        updateAllocationQuantity(beerOrderDTO, beerOrder);
+        updateAllocationQuantity(beerOrderDTO);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
         sendBeerOrderEvent(beerOrder, BeerOrderEventEnum.ALLOCATION_FAILED);
     }
 
-    private void updateAllocationQuantity(BeerOrderDTO beerOrderDTO, BeerOrder beerOrder) {
+    private void updateAllocationQuantity(BeerOrderDTO beerOrderDTO) {
         BeerOrder allocatedOrder = beerOrderRepository.getById(beerOrderDTO.getId());
 
         allocatedOrder.getBeerOrderLines().forEach(orderLine -> {
@@ -85,7 +85,7 @@ public class BeerOrderManagerImpl implements BeerOrderManager {
             });
         });
 
-        beerOrderRepository.saveAndFlush(beerOrder);
+        beerOrderRepository.saveAndFlush(allocatedOrder);
     }
 
     private void sendBeerOrderEvent(BeerOrder beerOrder, BeerOrderEventEnum event) {

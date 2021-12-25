@@ -12,6 +12,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -27,10 +28,11 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
     private final BeerOrderMapper beerOrderMapper;
     private final BeerOrderRepository beerOrderRepository;
 
+    @Transactional
     @Override
     public void execute(StateContext<BeerOrderStatusEnum, BeerOrderEventEnum> context) {
-        String beerOderId = (String) context.getMessage().getHeaders().get(BEER_ORDER_ID_HEADER);
-        BeerOrder beerOrder = beerOrderRepository.getById(UUID.fromString(beerOderId));
+        UUID beerOderId = (UUID) context.getMessage().getHeaders().get(BEER_ORDER_ID_HEADER);
+        BeerOrder beerOrder = beerOrderRepository.getById(beerOderId);
 
         jmsTemplate.convertAndSend(VALIDATE_ORDER_QUEUE, ValidateOrderRequestEvent.builder()
                 .beerOrderDTO(beerOrderMapper.beerOrderToDto(beerOrder))

@@ -3,6 +3,8 @@ package com.whosaidmeow.msscbeeroderservice.domain;
 public enum BeerOrderStatusEnum {
     NEW,
 
+    CANCELED,
+
     VALIDATED, VALIDATION_PENDING, VALIDATION_EXCEPTION,
 
     ALLOCATED, ALLOCATION_PENDING, ALLOCATION_EXCEPTION,
